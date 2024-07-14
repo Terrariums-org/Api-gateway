@@ -20,7 +20,6 @@ async function bootstrap() {
     new RpcCustomExceptionFilter(),
   );
   await app.listen(3000);
-
   logger.log('Client gateway started on port ' + 3000);
 }
 bootstrap();

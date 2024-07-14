@@ -10,6 +10,7 @@ import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
 import { RABBITMQ_SERVICE } from 'src/shared/constants';
 import { AUTH_SERVICES_NAMES } from './entities/AuthServicesNames';
+import { CreateLoginDTO, CreateUserDto } from './dto';
 
 @Controller('auth')
 export class AuthController {
@@ -17,12 +18,9 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.ACCEPTED)
-  async login(@Body() createLoginReq: any) {
+  async login(@Body() createLoginReq: CreateLoginDTO) {
     return await this.client
-      .send(
-        { cmd: AUTH_SERVICES_NAMES.LOGIN_USER, createLoginReq },
-        createLoginReq,
-      )
+      .send({ cmd: AUTH_SERVICES_NAMES.LOGIN_USER }, createLoginReq)
       .pipe(
         catchError((err) => {
           throw new RpcException(err);
@@ -32,5 +30,13 @@ export class AuthController {
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
-  async register(@Body() createUserReq: any) {}
+  async register(@Body() createUserReq: CreateUserDto) {
+    return await this.client
+      .send({ cmd: AUTH_SERVICES_NAMES.REGISTER_USER }, createUserReq)
+      .pipe(
+        catchError((err) => {
+          throw new RpcException(err);
+        }),
+      );
+  }
 }
