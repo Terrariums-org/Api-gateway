@@ -12,7 +12,7 @@ import { configService } from 'src/shared/dto';
         transport: Transport.RMQ,
         options: {
           urls: configService.get('BROKER_HOST'),
-          queue: AUTH_QUEUE.authQueue,
+          queue: AUTH_QUEUE,
           queueOptions: {
             durable: false,
           },
