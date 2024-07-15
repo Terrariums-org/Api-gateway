@@ -11,7 +11,9 @@ import { catchError } from 'rxjs';
 import { RABBITMQ_SERVICE } from 'src/shared/constants';
 import { AUTH_SERVICES_NAMES } from './entities/AuthServicesNames';
 import { CreateLoginDTO, CreateUserDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(@Inject(RABBITMQ_SERVICE) private readonly client: ClientProxy) {}
