@@ -2,17 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { RpcCustomExceptionFilter } from './shared/exceptions/rpcCustomException.filter';
-import {
-  DocumentBuilder,
-  SwaggerDocumentOptions,
-  SwaggerModule,
-} from '@nestjs/swagger';
-import {
-  CreateLoginDTO,
-  CreateUserDto,
-  CreateUserProfile,
-  UpdateUserDto,
-} from './auth/dto';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const logger = new Logger('Client-Gateway');
