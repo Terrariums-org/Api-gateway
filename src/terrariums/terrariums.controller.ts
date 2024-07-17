@@ -13,19 +13,19 @@ import {
 } from '@nestjs/common';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { RABBITMQ_SERVICE } from 'src/shared/constants';
 import { TERRARIUM_SERVICES_NAMES } from './entities';
 import { catchError } from 'rxjs';
 import { CreateTerrariumDto } from './dto';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 
 @ApiTags('Terrariums')
-// @UseGuards(AuthGuard)
-// @ApiBearerAuth('JWT-auth')
+@UseGuards(AuthGuard)
+@ApiBearerAuth('JWT-auth')
 @Controller('terrariums')
 export class TerrariumsController {
   constructor(
-    @Inject(RABBITMQ_SERVICE) private readonly _client: ClientProxy,
+    @Inject(TERRARIUM_SERVICES_NAMES.TERRARIUM_SERVICE)
+    private readonly _client: ClientProxy,
   ) {}
 
   @Post()

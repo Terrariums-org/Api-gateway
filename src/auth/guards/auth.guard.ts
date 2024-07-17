@@ -8,12 +8,14 @@ import {
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { Request } from 'express';
-import { RABBITMQ_SERVICE } from 'src/shared/constants';
 import { AUTH_SERVICES_NAMES } from '../entities/AuthServicesNames';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(@Inject(RABBITMQ_SERVICE) private readonly client: ClientProxy) {}
+  constructor(
+    @Inject(AUTH_SERVICES_NAMES.AUTH_SERVICE)
+    private readonly client: ClientProxy,
+  ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     try {
