@@ -23,8 +23,8 @@ export class MailController {
   @Post()
   @HttpCode(HttpStatus.OK)
   async sendEmail(@Body() emailReq: EmailDTO) {
-    return this._client
-      .send({ cmd: MAIL_SERVICES_NAMES.SEND_EMAIL }, emailReq)
+    return await this._client
+      .emit({ cmd: MAIL_SERVICES_NAMES.SEND_EMAIL }, emailReq)
       .pipe(
         catchError((err) => {
           throw new RpcException(err);
