@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { RpcCustomExceptionFilter } from './shared/exceptions/rpcCustomException.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { configService } from './shared/dto';
 
 async function bootstrap() {
   const logger = new Logger('Client-Gateway');
@@ -39,7 +40,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
-  await app.listen(4300);
-  logger.log('Client gateway started on port ' + 4300);
+  await app.listen(configService.get('PORT'));
+  logger.log('Client gateway started on port ' + configService.get('PORT'));
 }
 bootstrap();
