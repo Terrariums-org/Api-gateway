@@ -1,0 +1,4 @@
+export enum STATISTICS_SERVICES_NAMES {
+  STATISTICS_SERVICE = 'STATISTICS_SERVICE',
+  GET_STATISTICS = 'statitics.getStatistics',
+}
