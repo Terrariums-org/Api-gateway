@@ -6,13 +6,17 @@ import {
   Inject,
   Param,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { STATISTICS_SERVICES_NAMES } from './entities';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 
 @ApiTags('Statistics')
+@UseGuards(AuthGuard)
+@ApiBearerAuth('JWT-auth')
 @Controller('statistics')
 export class StatisticsController {
   constructor(

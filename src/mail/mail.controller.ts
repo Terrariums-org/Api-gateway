@@ -5,14 +5,18 @@ import {
   HttpStatus,
   Inject,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { MAIL_SERVICES_NAMES } from './entities';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { EmailDTO } from './dto/email.dto';
 import { catchError } from 'rxjs';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 
 @ApiTags('Email')
+@UseGuards(AuthGuard)
+@ApiBearerAuth('JWT-auth')
 @Controller('mail')
 export class MailController {
   constructor(
