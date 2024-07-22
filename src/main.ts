@@ -8,6 +8,7 @@ import { configService } from './shared/dto';
 async function bootstrap() {
   const logger = new Logger('Client-Gateway');
   const app = await NestFactory.create(AppModule);
+  app.enableCors()
   app.setGlobalPrefix('api');
   //config for validations
   app.useGlobalPipes(
